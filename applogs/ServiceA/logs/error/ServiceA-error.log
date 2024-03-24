@@ -1,0 +1,174 @@
+2024-03-24 11:19:44.761 [ERROR] [main] c.a.c.n.r.NacosServiceRegistry - nacos registry, ServiceA register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='192.168.5.66:8848', username='', password='', endpoint='', namespace='c8fd8e42-04fb-4c57-bc46-18ddad72b408', watchDelay=30000, logName='', service='ServiceA', weight=1.0, clusterName='DEFAULT', group='DEFAULT_GROUP', namingLoadCacheAtStart='false', metadata={IPv6=null, preserved.register.source=SPRING_CLOUD, preserved.heart.beat.interval=1000}, registerEnabled=true, ip='192.168.5.69', networkInterface='', port=8080, secure=false, accessKey='', secretKey='', heartBeatInterval=1000, heartBeatTimeout=null, ipDeleteTimeout=null, instanceEnabled=true, ephemeral=false, failureToleranceEnabled=false}, ipDeleteTimeout=null, failFast=true}},
+com.alibaba.nacos.api.exception.NacosException: failed to req API:/nacos/v1/ns/instance after all servers([192.168.5.66:8848]) tried: java.net.ConnectException: Connection refused (Connection refused)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.reqApi(NamingHttpClientProxy.java:410)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.reqApi(NamingHttpClientProxy.java:351)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.reqApi(NamingHttpClientProxy.java:346)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.registerService(NamingHttpClientProxy.java:153)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:98)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:152)
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:75)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:232)
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:78)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:133)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:98)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:86)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:47)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:46)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178)
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:54)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:935)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.wx.ServiceA.main(ServiceA.java:18)
+2024-03-24 11:19:45.116 [ERROR] [main] o.s.b.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is java.lang.reflect.UndeclaredThrowableException
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:181)
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:54)
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155)
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:935)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:745)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:420)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.wx.ServiceA.main(ServiceA.java:18)
+Caused by: java.lang.reflect.UndeclaredThrowableException: null
+	at org.springframework.util.ReflectionUtils.rethrowRuntimeException(ReflectionUtils.java:147)
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:83)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:232)
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:78)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:133)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:98)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:86)
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:47)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:46)
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178)
+	... 14 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: failed to req API:/nacos/v1/ns/instance after all servers([192.168.5.66:8848]) tried: java.net.ConnectException: Connection refused (Connection refused)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.reqApi(NamingHttpClientProxy.java:410)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.reqApi(NamingHttpClientProxy.java:351)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.reqApi(NamingHttpClientProxy.java:346)
+	at com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy.registerService(NamingHttpClientProxy.java:153)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:98)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:152)
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:75)
+	... 27 common frames omitted
+2024-03-24 12:39:23.254 [ERROR] [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Config data resource 'NacosConfigDataResource{properties=NacosConfigProperties{serverAddr='192.168.5.66:8848', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='yaml', timeout=3000, maxRetry='null', configLongPollTimeout='null', configRetryTime='null', enableRemoteSyncConfig=false, endpoint='null', namespace='c8fd8e42-04fb-4c57-bc46-18ddad72b408', accessKey='null', secretKey='null', ramRoleName='null', contextPath='null', clusterName='null', name='null'', shares=null, extensions=null, refreshEnabled=true}, optional=false, profiles=[Profiles@57bc27f5 active = '[]', default = '[default]', accepted = '[default]'], config=NacosItemConfig{group='DEFAULT_GROUP', dataId='service_a_config.yaml&group=SERVICE_A_CONFIGS', suffix='yaml&group=SERVICE_A_CONFIGS', refreshEnabled=true, preference=null}}' via location 'nacos:/service_a_config.yaml&group=SERVICE_A_CONFIGS' does not exist
+
+Action:
+
+Check that the value 'nacos:/service_a_config.yaml&group=SERVICE_A_CONFIGS' at class path resource [application.yaml] - 7:9 is correct, or prefix it with 'optional:'
+
+2024-03-24 12:39:34.806 [ERROR] [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Config data resource 'NacosConfigDataResource{properties=NacosConfigProperties{serverAddr='192.168.5.66:8848', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='yaml', timeout=3000, maxRetry='null', configLongPollTimeout='null', configRetryTime='null', enableRemoteSyncConfig=false, endpoint='null', namespace='c8fd8e42-04fb-4c57-bc46-18ddad72b408', accessKey='null', secretKey='null', ramRoleName='null', contextPath='null', clusterName='null', name='null'', shares=null, extensions=null, refreshEnabled=true}, optional=false, profiles=[Profiles@57bc27f5 active = '[]', default = '[default]', accepted = '[default]'], config=NacosItemConfig{group='DEFAULT_GROUP', dataId='service_a_config.yaml&group=SERVICE_A_CONFIGS', suffix='yaml&group=SERVICE_A_CONFIGS', refreshEnabled=true, preference=null}}' via location 'nacos:/service_a_config.yaml&group=SERVICE_A_CONFIGS' does not exist
+
+Action:
+
+Check that the value 'nacos:/service_a_config.yaml&group=SERVICE_A_CONFIGS' at class path resource [application.yaml] - 7:9 is correct, or prefix it with 'optional:'
+
+2024-03-24 12:40:11.773 [ERROR] [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Config data resource 'NacosConfigDataResource{properties=NacosConfigProperties{serverAddr='192.168.5.66:8848', encode='null', group='DEFAULT_GROUP', prefix='null', fileExtension='yaml', timeout=3000, maxRetry='null', configLongPollTimeout='null', configRetryTime='null', enableRemoteSyncConfig=false, endpoint='null', namespace='c8fd8e42-04fb-4c57-bc46-18ddad72b408', accessKey='null', secretKey='null', ramRoleName='null', contextPath='null', clusterName='null', name='null'', shares=null, extensions=null, refreshEnabled=true}, optional=false, profiles=[Profiles@57bc27f5 active = '[]', default = '[default]', accepted = '[default]'], config=NacosItemConfig{group='DEFAULT_GROUP', dataId='service_a_config.yaml&group=SERVICE_A_CONFIGS', suffix='yaml&group=SERVICE_A_CONFIGS', refreshEnabled=true, preference=null}}' via location 'nacos:/service_a_config.yaml&group=SERVICE_A_CONFIGS' does not exist
+
+Action:
+
+Check that the value 'nacos:/service_a_config.yaml&group=SERVICE_A_CONFIGS' at class path resource [application.yaml] - 7:9 is correct, or prefix it with 'optional:'
+
+2024-03-24 18:14:06.240 [ERROR] [main] o.s.b.SpringApplication - Application run failed
+org.yaml.snakeyaml.constructor.DuplicateKeyException: while constructing a mapping
+ in 'reader', line 1, column 1:
+    spring:
+    ^
+found duplicate key seata
+ in 'reader', line 69, column 1:
+    seata:
+    ^
+
+	at org.yaml.snakeyaml.constructor.SafeConstructor.processDuplicateKeys(SafeConstructor.java:105)
+	at org.yaml.snakeyaml.constructor.SafeConstructor.flattenMapping(SafeConstructor.java:76)
+	at org.yaml.snakeyaml.constructor.SafeConstructor.constructMapping2ndStep(SafeConstructor.java:189)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.constructMapping(BaseConstructor.java:461)
+	at org.yaml.snakeyaml.constructor.SafeConstructor$ConstructYamlMap.construct(SafeConstructor.java:556)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.constructObjectNoCheck(BaseConstructor.java:230)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.constructObject(BaseConstructor.java:220)
+	at org.springframework.boot.env.OriginTrackedYamlLoader$OriginTrackingConstructor.constructObject(OriginTrackedYamlLoader.java:123)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.constructDocument(BaseConstructor.java:174)
+	at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructor.java:139)
+	at org.springframework.boot.env.OriginTrackedYamlLoader$OriginTrackingConstructor.getData(OriginTrackedYamlLoader.java:103)
+	at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:514)
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:198)
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:166)
+	at org.springframework.boot.env.OriginTrackedYamlLoader.load(OriginTrackedYamlLoader.java:88)
+	at org.springframework.boot.env.YamlPropertySourceLoader.load(YamlPropertySourceLoader.java:50)
+	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:54)
+	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:36)
+	at org.springframework.boot.context.config.ConfigDataLoaders.load(ConfigDataLoaders.java:107)
+	at org.springframework.boot.context.config.ConfigDataImporter.load(ConfigDataImporter.java:128)
+	at org.springframework.boot.context.config.ConfigDataImporter.resolveAndLoad(ConfigDataImporter.java:86)
+	at org.springframework.boot.context.config.ConfigDataEnvironmentContributors.withProcessedImports(ConfigDataEnvironmentContributors.java:116)
+	at org.springframework.boot.context.config.ConfigDataEnvironment.processInitial(ConfigDataEnvironment.java:240)
+	at org.springframework.boot.context.config.ConfigDataEnvironment.processAndApply(ConfigDataEnvironment.java:227)
+	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:102)
+	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:94)
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEnvironmentPreparedEvent(EnvironmentPostProcessorApplicationListener.java:102)
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEvent(EnvironmentPostProcessorApplicationListener.java:87)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:85)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:66)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:120)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:114)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:65)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:343)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:301)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1317)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.wx.ServiceA.main(ServiceA.java:21)

@@ -1,0 +1,4 @@
+# Project exclude paths
+/ServiceA/target/
+/ServiceB/target/
+/ServiceC/target/

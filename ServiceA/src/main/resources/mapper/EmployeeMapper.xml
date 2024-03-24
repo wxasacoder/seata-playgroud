@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Auto created by codeAppend plugin -->
+<mapper namespace="org.wx.dao.EmployeeDao">
+
+    <resultMap id="EmployeeRM" type="org.wx.domain.Employee">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="depart" column="depart"/>
+		<result property="sal" column="sal"/>
+    </resultMap>
+
+    <!-- all sql columns -->
+    <sql id="columns">
+         `id`,`name`,`depart`,`sal`
+	</sql>
+
+</mapper>
