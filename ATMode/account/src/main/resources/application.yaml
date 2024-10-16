@@ -58,8 +58,13 @@ feign:
         connectTimeout: 10000
         readTimeout: 10000
 # -----------seata--------------
+#seata:
+#  data-source-proxy-mode: AT
 seata:
-  data-source-proxy-mode: AT
+  client:
+    rm:
+      datasource:
+        datasource-type: AT
   # 配置 当前应用使用的事务组
   tx-service-group: default_tx_group
   enabled: true

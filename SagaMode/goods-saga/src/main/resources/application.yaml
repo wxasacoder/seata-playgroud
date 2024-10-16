@@ -1,9 +1,9 @@
 spring:
   application:
-    name: account
+    name: goods
   config:
     import:
-      - nacos:/account.yaml
+      - nacos:/goods.yaml
   #      - nacos:/service_a_config.yaml?group=SERVICE_A_CONFIGS&refreshEnabled=true
   datasource:
     dynamic:
@@ -58,13 +58,13 @@ feign:
         connectTimeout: 10000
         readTimeout: 10000
 # -----------seata--------------
-#seata:
-#  data-source-proxy-mode: AT
 seata:
-  client:
-    rm:
-      datasource:
-        datasource-type: AT
+  data-source-proxy-mode: AT
+#seata:
+#  client:
+#    rm:
+#      datasource:
+#        datasource-type: TCC
   # 配置 当前应用使用的事务组
   tx-service-group: default_tx_group
   enabled: true
