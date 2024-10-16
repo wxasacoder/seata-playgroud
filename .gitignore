@@ -2,3 +2,5 @@
 /ServiceA/target/
 /ServiceB/target/
 /ServiceC/target/
+.idea
+applogs
