@@ -59,7 +59,9 @@ feign:
         readTimeout: 10000
 # -----------seata--------------
 seata:
-  #  data-source-proxy-mode: AT
+  # Tcc 和 At/XA 可以共同存在，但是AT和XA只能取其一
+  # AT和XA之间的切换只需要下面的配置更改即可
+  data-source-proxy-mode: AT
   # 配置 当前应用使用的事务组
   tx-service-group: default_tx_group
   enabled: true

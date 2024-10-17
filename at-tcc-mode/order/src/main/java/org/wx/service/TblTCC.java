@@ -9,6 +9,11 @@ import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
  * @author wuxin
  * @date 2024/10/17 21:20:03
  */
+
+/**
+ * 注意！！！！！！增加了此注解的interface的实现只能使用TCC模式
+ * 如果尝试使用XA或者AT则会导致事务失效
+ */
 @LocalTCC
 public interface TblTCC {
 

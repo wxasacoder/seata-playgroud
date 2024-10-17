@@ -1,36 +1,34 @@
-
-DROP TABLE IF EXISTS `storage_tbl`;
-CREATE TABLE `storage_tbl` (
-                               `id` int(11) NOT NULL AUTO_INCREMENT,
-                               `commodity_code` varchar(255) DEFAULT NULL,
-                               `count` int(11) DEFAULT 0,
-                               PRIMARY KEY (`id`),
-                               UNIQUE KEY (`commodity_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `order_tbl`;
-CREATE TABLE `order_tbl` (
-                             `id` int(11) NOT NULL AUTO_INCREMENT,
-                             `user_id` varchar(255) DEFAULT NULL,
-                             `commodity_code` varchar(255) DEFAULT NULL,
-                             `count` int(11) DEFAULT 0,
-                             `money` int(11) DEFAULT 0,
-                             PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `account_tbl`;
+-- 模拟下单的相关表
 CREATE TABLE `account_tbl` (
-                               `id` int(11) NOT NULL AUTO_INCREMENT,
-                               `user_id` varchar(255) DEFAULT NULL,
-                               `money` int(11) DEFAULT 0,
+                               `id` int NOT NULL AUTO_INCREMENT,
+                               `user_id` bigint DEFAULT NULL,
+                               `money` int DEFAULT '0',
+                               `lock_money` int NOT NULL DEFAULT '0',
                                PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 
+CREATE TABLE `order_tbl` (
+                             `id` int NOT NULL AUTO_INCREMENT,
+                             `user_id` bigint DEFAULT NULL,
+                             `commodity_code` varchar(255) DEFAULT NULL,
+                             `count` int DEFAULT '0',
+                             `money` int DEFAULT '0',
+                             PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `storage_tbl` (
+                               `id` int NOT NULL AUTO_INCREMENT,
+                               `commodity_code` varchar(255) DEFAULT NULL,
+                               `count` int DEFAULT '0',
+                               `sold` int NOT NULL DEFAULT '0',
+                               `frozen` int NOT NULL DEFAULT '0',
+                               PRIMARY KEY (`id`),
+                               UNIQUE KEY `commodity_code` (`commodity_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3
 
 -- 注意此处0.3.0+ 增加唯一索引 ux_undo_log
+-- 使用AT需要
 CREATE TABLE `undo_log` (
                             `id` bigint(20) NOT NULL AUTO_INCREMENT,
                             `branch_id` bigint(20) NOT NULL,
@@ -45,6 +43,7 @@ CREATE TABLE `undo_log` (
                             UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- 使用tcc需要
 CREATE TABLE IF NOT EXISTS `tcc_fence_log`
 (
     `xid`           VARCHAR(128)  NOT NULL COMMENT 'global id',

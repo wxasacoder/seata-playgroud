@@ -24,6 +24,7 @@ public class OrderController {
 
     /**
      * at模式和xa 模式不是不能共存的原因是其数据库链接池的代理方式不一样
+     * 这两种模式的切换只需要在配置文件中切换即可 seata 默认是at
      * seata 默认的是at模式
      * @param userId
      * @param sku
