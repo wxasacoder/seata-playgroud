@@ -19,9 +19,23 @@ public class GoodsStockController {
 
     @PostMapping("/deduct/goods/count")
     public Boolean deductGoodsStock(String commodityCode, Integer count){
-     return    tblService.deductGoodsStock(commodityCode,count);
+     return   tblService.deductGoodsStock(commodityCode,count);
     }
 
+    @PostMapping("/deduct/goods/try")
+    public Boolean tryDeduct(String commodityCode, Integer count){
+     return   tblService.tryDeduct(commodityCode,count);
+    }
+
+    @PostMapping("/deduct/goods/confirm")
+    public Boolean confirm(String commodityCode, Integer count){
+     return  tblService.confirm(commodityCode,count);
+    }
+
+    @PostMapping("/deduct/goods/cancel")
+    public Boolean cancel(String commodityCode, Integer count){
+     return  tblService.cancel(commodityCode,count);
+    }
 
 
 }

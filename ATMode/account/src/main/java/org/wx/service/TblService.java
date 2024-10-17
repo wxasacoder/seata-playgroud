@@ -9,4 +9,10 @@ import org.wx.domain.Tbl;
 public interface TblService extends IService<Tbl> {
 
     Boolean deductMoney(Long userId, Integer money);
+
+    boolean tryDeduct(Long userId, Integer money);
+
+    boolean confirm(Long userId, Integer money);
+
+    boolean cancel(Long userId, Integer money);
 }

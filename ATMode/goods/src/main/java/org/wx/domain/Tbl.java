@@ -27,5 +27,11 @@ public class Tbl {
 	@TableField("count")
 	private Integer count;
 
+	@TableField("sold")
+	private Integer sold;
+
+	@TableField("frozen")
+	private Integer frozen;
+
 
 }

@@ -9,4 +9,10 @@ import org.wx.domain.Tbl;
 public interface TblService extends IService<Tbl> {
 
     Boolean deductGoodsStock(String commodityCode, Integer count);
+
+    Boolean tryDeduct(String commodityCode, Integer count);
+
+    Boolean confirm(String commodityCode, Integer count);
+
+    Boolean cancel(String commodityCode, Integer count);
 }

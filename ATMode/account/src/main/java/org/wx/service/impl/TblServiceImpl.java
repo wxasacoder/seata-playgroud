@@ -23,5 +23,38 @@ public class TblServiceImpl extends ServiceImpl<TblDao, Tbl> implements TblServi
         }
         return update(Wrappers.<Tbl>lambdaUpdate().set(Tbl::getMoney, one.getMoney() - money));
     }
-   
+
+    @Override
+    public boolean tryDeduct(Long userId, Integer money) {
+        Tbl one = getOne(Wrappers.<Tbl>lambdaQuery().eq(Tbl::getUserId, userId));
+        if(one.getMoney() - money < 0){
+            throw new RuntimeException("钱不够哦");
+        }
+        return update(Wrappers.<Tbl>lambdaUpdate()
+                .set(Tbl::getLockMoney, money)
+                .set(Tbl::getMoney, one.getMoney() - money)
+
+        );
+    }
+
+    @Override
+    public boolean confirm(Long userId, Integer money) {
+        Tbl one = getOne(Wrappers.<Tbl>lambdaQuery().eq(Tbl::getUserId, userId));
+        if(one.getMoney() - money < 0){
+            throw new RuntimeException("钱不够哦");
+        }
+        return update(Wrappers.<Tbl>lambdaUpdate().set(Tbl::getLockMoney, one.getLockMoney() - money));    }
+
+    @Override
+    public boolean cancel(Long userId, Integer money) {
+        Tbl one = getOne(Wrappers.<Tbl>lambdaQuery().eq(Tbl::getUserId, userId));
+        if (one.getMoney() - money < 0) {
+            throw new RuntimeException("钱不够哦");
+        }
+        return update(Wrappers.<Tbl>lambdaUpdate()
+                .set(Tbl::getLockMoney, one.getMoney() - money)
+                .set(Tbl::getMoney, one.getMoney() + money)
+
+        );
+    }
 }

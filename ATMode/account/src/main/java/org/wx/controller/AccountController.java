@@ -21,4 +21,21 @@ public class AccountController {
                                Integer money){
        return tblService.deductMoney(userId, money);
     }
+
+    @PostMapping("/deduct/try")
+    public boolean tryDeduct(Long userId ,
+                               Integer money){
+       return tblService.tryDeduct(userId, money);
+    }
+
+    @PostMapping("/deduct/confirm")
+    public boolean confirm(Long userId , Integer money){
+       return tblService.confirm(userId, money);
+    }
+
+    @PostMapping("/deduct/cancel")
+    public boolean cancel(Long userId ,
+                               Integer money){
+       return tblService.cancel(userId, money);
+    }
 }

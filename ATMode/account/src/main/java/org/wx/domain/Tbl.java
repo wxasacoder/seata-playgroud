@@ -27,5 +27,8 @@ public class Tbl {
 	@TableField("money")
 	private Integer money;
 
+	@TableField("lock_money")
+	private Integer lockMoney;
+
 
 }

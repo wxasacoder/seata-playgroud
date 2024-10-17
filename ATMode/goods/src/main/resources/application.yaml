@@ -59,7 +59,7 @@ feign:
         readTimeout: 10000
 # -----------seata--------------
 seata:
-  data-source-proxy-mode: AT
+#  data-source-proxy-mode: AT
   # 配置 当前应用使用的事务组
   tx-service-group: default_tx_group
   enabled: true
@@ -79,12 +79,12 @@ seata:
       cluster: default
       application: seata-server
 # 这样设计的好处是 能够在集群故障的时候快速切换
-  service:
-    # 将一个事务组映射到一个 group 集群的名字上来
-    vgroup-mapping:
-      default_tx_group: default
-    # 对 default的groupList 定义集群地址
-    # 文档原文：这里多了一层获取事务分组到映射集群的配置。这样设计后，事务分组可以作为资源的逻辑隔离单位，出现某集群故障时可以快速failover，只切换对应分组，可以把故障缩减到服务级别，但前提也是你有足够server集群。
-    grouplist:
-      default: 192.168.5.66:8091
-    disable-global-transaction: false
+#  service:
+#    # 将一个事务组映射到一个 group 集群的名字上来
+#    vgroup-mapping:
+#      default_tx_group: default
+#    # 对 default的groupList 定义集群地址
+#    # 文档原文：这里多了一层获取事务分组到映射集群的配置。这样设计后，事务分组可以作为资源的逻辑隔离单位，出现某集群故障时可以快速failover，只切换对应分组，可以把故障缩减到服务级别，但前提也是你有足够server集群。
+#    grouplist:
+#      default: 192.168.5.66:8091
+#    disable-global-transaction: false

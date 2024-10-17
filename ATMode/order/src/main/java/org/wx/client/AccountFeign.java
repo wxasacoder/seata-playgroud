@@ -1,5 +1,6 @@
 package org.wx.client;
 
+import io.seata.rm.tcc.api.TwoPhaseBusinessAction;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,4 +18,18 @@ public interface AccountFeign {
     @PostMapping("/deduct/money")
     boolean deductMoney(@RequestParam("userId") Long userId ,
                         @RequestParam("money") Integer money);
+
+
+    @PostMapping("/deduct/try")
+    @TwoPhaseBusinessAction(name = "TccActionOne", commitMethod = "confirm", rollbackMethod = "cancel")
+    boolean tryDeduct(@RequestParam("userId") Long userId ,
+                      @RequestParam("money") Integer money);
+
+    @PostMapping("/deduct/confirm")
+    boolean confirm(@RequestParam("userId") Long userId ,
+                    @RequestParam("money") Integer money);
+
+    @PostMapping("/deduct/cancel")
+    boolean cancel(@RequestParam("userId") Long userId ,
+                   @RequestParam("money") Integer money);
 }
