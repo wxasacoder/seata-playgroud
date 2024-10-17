@@ -92,4 +92,4 @@ seata:
 
 # 注意如果使用 nacos 作为配置中心的话，在nacos 和seata相同组和命中空间下建一个配置文件
 # service.vgroupMapping.xxx（组名）  此处则为service.vgroupMapping.default_tx_group
-# 内容为配置的组名 default （这个 default 是在seata 的服务端定义的）
+# 内容为配置的组名 default （这个 default 是在seata 的服务端定义的）项目工程 可以通过这个来连接注册在nacos上的seata server
