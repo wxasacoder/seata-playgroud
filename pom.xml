@@ -9,8 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>SagaMode</module>
-        <module>ATMode</module>
+        <module>at-tcc-mode</module>
     </modules>
 
     <properties>
