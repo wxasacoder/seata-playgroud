@@ -10,20 +10,13 @@ import org.wx.domain.Tbl;
 /**
  *  Auto created by codeAppend plugin
  */
-@LocalTCC
 public interface TblService extends IService<Tbl> {
-
+    /**
+     * for test at or xa
+     * @param userId
+     * @param sku
+     * @param count
+     * @return
+     */
     Boolean order(Long userId, String sku, Integer count);
-
-    @TwoPhaseBusinessAction(name = "prepareOrder", commitMethod = "confirmOrder", rollbackMethod = "cancelOrder",useTCCFence = true)
-    Boolean prepareOrder(BusinessActionContext context,
-                         @BusinessActionContextParameter(paramName = "userId") Long userId,
-                         @BusinessActionContextParameter(paramName = "sku") String sku,
-                         @BusinessActionContextParameter(paramName = "count") Integer count);
-
-
-    Boolean confirmOrder(BusinessActionContext businessActionContext);
-
-
-    Boolean cancelOrder(BusinessActionContext businessActionContext);
 }

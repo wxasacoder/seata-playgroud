@@ -45,45 +45,4 @@ public class TblServiceImpl extends ServiceImpl<TblDao, Tbl> implements TblServi
     }
 
 
-
-    @Override
-    public Boolean prepareOrder(BusinessActionContext context,
-                                @BusinessActionContextParameter(paramName = "userId") Long userId,
-                                @BusinessActionContextParameter(paramName = "sku") String sku,
-                                @BusinessActionContextParameter(paramName = "count") Integer count) {
-        Tbl tbl = new Tbl();
-        tbl.setCount(count);
-        tbl.setCommodityCode(sku);
-        tbl.setMoney(count * moneyPerGoods);
-        tbl.setUserId(userId);
-        save(tbl);
-        BusinessActionContextUtil.addContext("order", tbl.getId());
-        goodFeign.tryDeduct(sku, count);
-        accountFeign.tryDeduct(userId,count * moneyPerGoods);
-        return true;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Boolean confirmOrder(BusinessActionContext businessActionContext) {
-        goodFeign.confirm((String) businessActionContext.getActionContext().get("sku"),
-                (Integer) businessActionContext.getActionContext().get("count"));
-        accountFeign.confirm(new Long((Integer) businessActionContext.getActionContext().get("userId")),
-                (Integer) businessActionContext.getActionContext().get("count"));
-        return true;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Boolean cancelOrder(BusinessActionContext businessActionContext) {
-        goodFeign.cancel((String) businessActionContext.getActionContext().get("sku"),
-                (Integer) businessActionContext.getActionContext().get("count"));
-        accountFeign.cancel(new Long((Long) businessActionContext.getActionContext().get("userId")),
-                (Integer) businessActionContext.getActionContext().get("count"));
-        removeById((Long) businessActionContext.getActionContext().get("orderId"));
-        return true;
-    }
-
-
-
 }
