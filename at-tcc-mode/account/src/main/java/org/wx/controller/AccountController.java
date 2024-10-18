@@ -3,6 +3,7 @@ package org.wx.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wx.service.TblService;
+import org.wx.service.TblServiceTCC;
 
 import javax.annotation.Resource;
 
@@ -15,6 +16,8 @@ public class AccountController {
 
     @Resource
     private TblService tblService;
+    @Resource
+    private TblServiceTCC tblServiceTCC;
 
     @PostMapping("/deduct/money")
     public boolean deductMoney(Long userId ,
@@ -22,20 +25,15 @@ public class AccountController {
        return tblService.deductMoney(userId, money);
     }
 
+    /**
+     * for tcc
+     * @param userId
+     * @param money
+     * @return
+     */
     @PostMapping("/deduct/try")
     public boolean tryDeduct(Long userId ,
                                Integer money){
-       return tblService.tryDeduct(userId, money);
-    }
-
-    @PostMapping("/deduct/confirm")
-    public boolean confirm(Long userId , Integer money){
-       return tblService.confirm(userId, money);
-    }
-
-    @PostMapping("/deduct/cancel")
-    public boolean cancel(Long userId ,
-                               Integer money){
-       return tblService.cancel(userId, money);
+       return tblServiceTCC.tryDeduct(null,userId, money);
     }
 }

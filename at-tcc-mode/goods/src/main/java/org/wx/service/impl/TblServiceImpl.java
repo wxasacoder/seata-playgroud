@@ -22,40 +22,5 @@ public class TblServiceImpl extends ServiceImpl<TblDao, Tbl> implements TblServi
                 .set(Tbl::getCount, one.getCount()  - count));
     }
 
-    @Override
-    public Boolean tryDeduct(String commodityCode, Integer count) {
-        Tbl one = getOne(Wrappers.<Tbl>lambdaQuery()
-                .eq(Tbl::getCommodityCode, commodityCode)
-        );
-        return update(Wrappers.<Tbl>lambdaUpdate()
-                .eq(Tbl::getCommodityCode,commodityCode)
-                .set(Tbl::getCount, one.getCount()  - count)
-                .set(Tbl::getFrozen,one.getFrozen() + count)
-        );
-    }
-
-    @Override
-    public Boolean confirm(String commodityCode, Integer count) {
-        Tbl one = getOne(Wrappers.<Tbl>lambdaQuery()
-                .eq(Tbl::getCommodityCode, commodityCode)
-        );
-        return update(Wrappers.<Tbl>lambdaUpdate()
-                .eq(Tbl::getCommodityCode,commodityCode)
-                .set(Tbl::getFrozen, one.getFrozen()  - count)
-                .set(Tbl::getSold,one.getSold() + count)
-        );
-    }
-
-    @Override
-    public Boolean cancel(String commodityCode, Integer count) {
-        Tbl one = getOne(Wrappers.<Tbl>lambdaQuery()
-                .eq(Tbl::getCommodityCode, commodityCode)
-        );
-        return update(Wrappers.<Tbl>lambdaUpdate()
-                .eq(Tbl::getCommodityCode,commodityCode)
-                .set(Tbl::getCount, one.getCount() + count)
-                .set(Tbl::getFrozen,one.getFrozen() - count)
-        );
-    }
 
 }

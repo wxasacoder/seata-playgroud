@@ -4,6 +4,7 @@ import lombok.Lombok;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wx.service.TblService;
+import org.wx.service.TblTCCService;
 
 import javax.annotation.Resource;
 
@@ -15,6 +16,8 @@ import javax.annotation.Resource;
 public class GoodsStockController {
     @Resource
     private TblService tblService;
+    @Resource
+    private TblTCCService tblTCCService;
 
 
     @PostMapping("/deduct/goods/count")
@@ -22,20 +25,17 @@ public class GoodsStockController {
      return   tblService.deductGoodsStock(commodityCode,count);
     }
 
+    /**
+     * for tcc
+     * @param commodityCode
+     * @param count
+     * @return
+     */
     @PostMapping("/deduct/goods/try")
     public Boolean tryDeduct(String commodityCode, Integer count){
-     return   tblService.tryDeduct(commodityCode,count);
+     return  tblTCCService.tryDeduct(null, commodityCode,count);
     }
 
-    @PostMapping("/deduct/goods/confirm")
-    public Boolean confirm(String commodityCode, Integer count){
-     return  tblService.confirm(commodityCode,count);
-    }
-
-    @PostMapping("/deduct/goods/cancel")
-    public Boolean cancel(String commodityCode, Integer count){
-     return  tblService.cancel(commodityCode,count);
-    }
 
 
 }

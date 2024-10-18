@@ -49,20 +49,20 @@ public class TblTCCImpl implements TblTCC {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean confirmOrder(BusinessActionContext businessActionContext) {
-        goodFeign.confirm((String) businessActionContext.getActionContext().get("sku"),
-                (Integer) businessActionContext.getActionContext().get("count"));
-        accountFeign.confirm(new Long((Integer) businessActionContext.getActionContext().get("userId")),
-                (Integer) businessActionContext.getActionContext().get("count"));
+//        goodFeign.confirm((String) businessActionContext.getActionContext().get("sku"),
+//                (Integer) businessActionContext.getActionContext().get("count"));
+//        accountFeign.confirm(new Long((Integer) businessActionContext.getActionContext().get("userId")),
+//                (Integer) businessActionContext.getActionContext().get("count"));
         return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean cancelOrder(BusinessActionContext businessActionContext) {
-        goodFeign.cancel((String) businessActionContext.getActionContext().get("sku"),
-                (Integer) businessActionContext.getActionContext().get("count"));
-        accountFeign.cancel(new Long((Long) businessActionContext.getActionContext().get("userId")),
-                (Integer) businessActionContext.getActionContext().get("count"));
+//        goodFeign.cancel((String) businessActionContext.getActionContext().get("sku"),
+//                (Integer) businessActionContext.getActionContext().get("count"));
+//        accountFeign.cancel(new Long((Long) businessActionContext.getActionContext().get("userId")),
+//                (Integer) businessActionContext.getActionContext().get("count"));
         tblService.removeById((Long) businessActionContext.getActionContext().get("orderId"));
         return true;
     }
