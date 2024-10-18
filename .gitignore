@@ -1,6 +1,6 @@
 # Project exclude paths
-at-tcc-mode/account/target/*
-at-tcc-mode/order/target/*
-at-tcc-mode/order/target/*
+at-tcc-mode/account/target
+at-tcc-mode/order/target
+at-tcc-mode/order/target
 .idea
 applogs
