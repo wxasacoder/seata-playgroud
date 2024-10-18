@@ -25,6 +25,12 @@ public class AccountController {
        return tblService.deductMoney(userId, money);
     }
 
+    @PostMapping("/deduct/money-local-mode")
+    public boolean deductMoneyLocalMode(Long userId ,
+                               Integer money){
+       return tblService.deductMoneyLocalMode(userId, money);
+    }
+
     /**
      * for tcc
      * @param userId
