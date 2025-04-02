@@ -27,24 +27,34 @@ public class TblServiceImpl extends ServiceImpl<TblDao, Tbl> implements TblServi
         /**
          * 和下面的方式一测试 全局锁
          */
-//        try {
-//            Thread.sleep(20000L);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        System.out.println(1 / 0);
+        try {
+            Thread.sleep(200000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return update;
     }
 
     /**
-     * GlobalLock 会对数据申请全局锁
+     * GlobalLock 会对数据申请全局锁 否不会
      * @param userId
      * @param money
      * @return
      */
     @Override
     @GlobalLock
-    public boolean deductMoneyLocalMode(Long userId, Integer money) {
-        return update(Wrappers.<Tbl>lambdaUpdate().eq(Tbl::getUserId, userId).set(Tbl::getMoney, 100));
+    public boolean queryForUpdate(Long userId, Integer money) {
+        return update(Wrappers.<Tbl>lambdaUpdate().eq(Tbl::getUserId, userId).set(Tbl::getMoney, money));
+    }
+
+    /**
+     * 加锁读必须加    @GlobalLock 否则无法完成全局锁的check
+     * @param userId
+     * @return
+     */
+    @Override
+    @GlobalLock
+    public BigDecimal queryForUpdate(Long userId) {
+        return new BigDecimal(getOne(Wrappers.<Tbl>lambdaQuery().eq(Tbl::getUserId, userId).last("for update")).getMoney());
     }
 }

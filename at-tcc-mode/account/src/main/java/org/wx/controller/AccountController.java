@@ -6,6 +6,7 @@ import org.wx.service.TblService;
 import org.wx.service.TblServiceTCC;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * @author wuxin
@@ -28,7 +29,12 @@ public class AccountController {
     @PostMapping("/deduct/money-local-mode")
     public boolean deductMoneyLocalMode(Long userId ,
                                Integer money){
-       return tblService.deductMoneyLocalMode(userId, money);
+       return tblService.queryForUpdate(userId, money);
+    }
+
+    @PostMapping("/deduct/for-update-query")
+    public BigDecimal queryForUpdate(Long userId){
+       return tblService.queryForUpdate(userId);
     }
 
     /**
